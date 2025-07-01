@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>International Payment - Neon</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #ff00cc;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      border: 2px solid #ff00cc;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px #ff00cc;
+      background-color: #1a1a1a;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00ffff;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 0.5rem 0;
+    }
+
+    input, button {
+      display: block;
+      width: 100%;
+      margin: 1rem 0;
+      padding: 0.7rem;
+      background: black;
+      color: #00ffff;
+      border: 2px solid #ff00cc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background: #ff00cc;
+      color: #000;
+      cursor: pointer;
+    }
+
+    #status {
+      text-align: center;
+      margin-top: 1rem;
+      color: #00ff99;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>💸 International Payment Instructions</h2>
+    <p>Please transfer the amount using the SWIFT international transfer system:</p>
+    <ul>
+      <li><strong>Bank Name:</strong> Bank of Bhutan Ltd.</li>
+      <li><strong>Account Name:</strong> Sonu Tiwari</li>
+      <li><strong>Account Number:</strong> 203956136</li>
+      <li><strong>SWIFT/BIC Code:</strong> BHUBBTBT</li>
+      <li><strong>Bank Address:</strong> Norzin Lam, Thimphu, Bhutan</li>
+      <li><strong>Currency:</strong> USD / EUR / INR</li>
+      <li><strong>Purpose:</strong> Payment for product/service</li>
+    </ul>
+
+    <hr style="border-color:#ff00cc">
+
+    <h3>📤 Upload Your Payment Proof</h3>
+    <p>After you've made the transfer, upload your payment receipt below.</p>
+
+    <form id="paymentForm">
+      <input type="email" id="userEmail" placeholder="Your Email" required />
+      <input type="text" id="userName" placeholder="Your Name" required />
+      <input type="file" id="proofImage" accept="image/*,.pdf" required />
+      <button type="submit">Submit Payment Proof</button>
+    </form>
+
+    <div id="status"></div>
+  </div>
+
+  <script>
+    document.getElementById("paymentForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const userEmail = document.getElementById("userEmail").value;
+      const userName = document.getElementById("userName").value;
+      const file = document.getElementById("proofImage").files[0];
+      const reader = new FileReader();
+
+      reader.onload = async function () {
+        const base64 = reader.result.split(',')[1];
+
+        const emailPayload = {
+          to: "st659136@gmail.com",
+          subject: "New SWIFT Payment Proof Submission",
+          body: `You have received a new payment proof:\n\nName: ${userName}\nEmail: ${userEmail}\n\nPlease verify the uploaded file.`,
+          attachment: {
+            filename: file.name,
+            content: base64
+          }
+        };
+
+        try {
+          // 🔴 Replace this fetch URL with your actual Google Apps Script or backend endpoint
+          const response = await fetch("https://your-google-apps-script-url.com/send-email", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(emailPayload)
+          });
+
+          const result = await response.json();
+          if (result.success) {
+            document.getElementById("status").innerText = "✅ Payment proof submitted successfully. We’ll verify and contact you soon.";
+          } else {
+            throw new Error("Email failed.");
+          }
+        } catch (err) {
+          document.getElementById("status").innerText = "❌ Error sending email. Try again later.";
+        }
+      };
+
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
