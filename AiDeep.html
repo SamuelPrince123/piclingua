@@ -26,5 +26,15 @@
     </div>
 
     <script src="AiDeep.js"></script>
+    <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTranscript = localStorage.getItem('speechTranscript');
+    if (savedTranscript) {
+      document.getElementById('chatbot-input').value = savedTranscript;
+      localStorage.removeItem('speechTranscript'); // Clear after use
+    }
+  });
+</script>
+
   </body>
 </html>

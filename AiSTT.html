@@ -14,57 +14,130 @@
 
 <h1>🎙️ Free Speech Recognition Demo</h1>
 <button id="start-btn">Start Listening</button>
-<button id="stop-btn" disabled>Stop Listening</button>
 
 <div id="transcript" placeholder="Your speech will appear here..."></div>
 
 <script>
-  // Check for browser support
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!window.SpeechRecognition) {
     alert('Sorry, your browser does not support Speech Recognition API.');
+    console.error('SpeechRecognition not supported');
   } else {
     const recognition = new SpeechRecognition();
-    recognition.interimResults = true;  // Show intermediate results
-    recognition.lang = 'en-US';          // Language (change if needed)
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
 
     const startBtn = document.getElementById('start-btn');
-    const stopBtn = document.getElementById('stop-btn');
     const transcriptDiv = document.getElementById('transcript');
 
     let finalTranscript = '';
+    let lastSpokenTime = Date.now();
+    let startTimestamp = 0;
+    let recognitionStarted = false;
 
-    recognition.addEventListener('result', event => {
-      let interimTranscript = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          finalTranscript += transcript + ' ';
+    recognition.addEventListener('start', () => {
+      recognitionStarted = true;
+      startBtn.disabled = true;
+      console.log('[recognition] started');
+    });
+
+    recognition.addEventListener('result', e => {
+      console.log('[recognition] result event', e);
+      lastSpokenTime = Date.now();
+
+      let interim = '';
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const t = e.results[i][0].transcript;
+        if (e.results[i].isFinal) {
+          finalTranscript += t + ' ';
+          console.log('  final transcript updated:', finalTranscript);
         } else {
-          interimTranscript += transcript;
+          interim += t;
+          console.log('  interim transcript:', t);
         }
       }
-      transcriptDiv.textContent = finalTranscript + interimTranscript;
+      transcriptDiv.textContent = finalTranscript + interim;
+    });
+
+    recognition.addEventListener('error', e => {
+      console.error('[recognition] error:', e.error);
+      alert('Speech recognition error: ' + e.error);
+      startBtn.disabled = false;
+      recognitionStarted = false;
     });
 
     recognition.addEventListener('end', () => {
-      stopBtn.disabled = true;
+      console.log('[recognition] end event');
+      const elapsed = Date.now() - startTimestamp;
+      console.log('  elapsed since start:', elapsed, 'ms');
+
+      // Ignore if recognition never started properly or ended too soon
+      if (!recognitionStarted) {
+        console.warn('  Ignored end event because recognition never started');
+        return;
+      }
+      if (elapsed < 1000) {
+        console.warn('  Ignored premature end event (<1s)');
+        return;
+      }
+
+      recognitionStarted = false;
       startBtn.disabled = false;
+
+      sendTranscript();
     });
+
+    function sendTranscript() {
+      const msg = transcriptDiv.textContent.trim();
+      console.log('sendTranscript() with message:', msg);
+      if (msg.length === 0) {
+        alert('No speech detected. Please try again.');
+        return;
+      }
+      localStorage.setItem('speechTranscript', msg);
+      console.log('  saved transcript to localStorage, redirecting...');
+      window.location.href = 'AiDeep.html';
+    }
 
     startBtn.addEventListener('click', () => {
+      console.log('Start button clicked');
       finalTranscript = '';
       transcriptDiv.textContent = '';
-      recognition.start();
-      startBtn.disabled = true;
-      stopBtn.disabled = false;
-    });
+      recognitionStarted = false;
+      lastSpokenTime = Date.now();
+      startTimestamp = Date.now();
+      console.log('  starting recognition at', startTimestamp);
 
-    stopBtn.addEventListener('click', () => {
-      recognition.stop();
-      stopBtn.disabled = true;
-      startBtn.disabled = false;
+      try {
+        recognition.start();
+      } catch (err) {
+        console.error('recognition.start() error:', err);
+        alert('Failed to start recognition: ' + err.message);
+        startBtn.disabled = false;
+        return;
+      }
+
+      // Max 30 seconds timer
+      setTimeout(() => {
+        if (recognitionStarted) {
+          console.log('Max duration reached, stopping recognition');
+          recognition.stop();
+        }
+      }, 30000);
+
+      // Check for 2 seconds silence
+      const silenceCheck = setInterval(() => {
+        if (!recognitionStarted) {
+          clearInterval(silenceCheck);
+          return;
+        }
+        if (Date.now() - lastSpokenTime > 2000) {
+          console.log('Detected 2 seconds silence, stopping recognition');
+          clearInterval(silenceCheck);
+          recognition.stop();
+        }
+      }, 500);
     });
   }
 </script>
