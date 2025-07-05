@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GPT-4.1 Chat Test</title>
+</head>
+<body>
+  <h2>Chat with GPT-4.1</h2>
+  <input type="text" id="userInput" placeholder="Type a message" style="width: 300px;">
+  <button onclick="sendMessage()">Send</button>
+  <pre id="responseBox"></pre>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("userInput").value.trim();
+      const responseBox = document.getElementById("responseBox");
+      responseBox.textContent = "Thinking...";
+
+      const res = await fetch("https://word-choosing.vercel.app/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: input })
+      });
+
+      const data = await res.json();
+      responseBox.textContent = data.reply || "No reply.";
+    }
+  </script>
+</body>
+</html>
