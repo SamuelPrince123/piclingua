@@ -25,26 +25,37 @@
       </div>
     </div>
 
-    <script src="AiDeep.js"></script>
+<script src="AiDeep.js"></script>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     const savedTranscript = localStorage.getItem('speechTranscript');
     if (savedTranscript) {
       const input = document.getElementById('chatbot-input');
-      input.value = savedTranscript;
-      localStorage.removeItem('speechTranscript'); // Clear after use
-
-      // Automatically "click" the send button to send the message
       const sendBtn = document.getElementById('send-btn');
-      if (sendBtn) {
-        sendBtn.click();
-        console.log('Auto-sent speech transcript:', savedTranscript);
-      } else {
-        console.warn('Send button not found');
-      }
+
+      // Put the transcript in the input field
+      input.value = savedTranscript;
+
+      // Make sure the chatbot is visible if using the floating icon
+      document.getElementById("chatbot-container").classList.remove("hidden");
+      document.getElementById("chatbot-icon").style.display = "none";
+
+      // Clear from localStorage to prevent repeat
+      localStorage.removeItem('speechTranscript');
+
+      // Wait for the DOM and scripts to initialize fully before clicking send
+      setTimeout(() => {
+        if (sendBtn) {
+          sendBtn.click();
+          console.log('✅ Auto-sent transcript:', savedTranscript);
+        } else {
+          console.warn('⚠️ Send button not found.');
+        }
+      }, 200); // Small delay to ensure event listeners are attached
     }
   });
 </script>
+
 
 
   </body>
