@@ -114,21 +114,34 @@
       });
     }
 
-    speechSynthesis.onvoiceschanged = populateVoices;
-
-    speakButton.addEventListener('click', () => {
-      const utterance = new SpeechSynthesisUtterance(textInput.value);
-      const selectedVoice = voices[voiceSelect.value];
+    function speakText(text) {
+      if (!text) return;
+      const utterance = new SpeechSynthesisUtterance(text);
+      const selectedVoice = voices[voiceSelect.value || 0];
       utterance.voice = selectedVoice;
       utterance.pitch = parseFloat(pitchInput.value);
       utterance.rate = parseFloat(rateInput.value);
       speechSynthesis.speak(utterance);
-    });
+    }
 
-    // Populate voices on page load (some browsers require delay)
+    speechSynthesis.onvoiceschanged = populateVoices;
+
     window.onload = () => {
-      setTimeout(populateVoices, 100);
+      setTimeout(() => {
+        populateVoices();
+
+        const aiMessage = localStorage.getItem('aiMessage');
+        if (aiMessage) {
+          textInput.value = aiMessage;
+          speakText(aiMessage);
+          localStorage.removeItem('aiMessage'); // prevent repeat
+        }
+      }, 100);
     };
+
+    speakButton.addEventListener('click', () => {
+      speakText(textInput.value);
+    });
   </script>
 
 </body>

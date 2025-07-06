@@ -28,6 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
     messageElement.textContent = message;
     chatbotMessages.appendChild(messageElement);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+    // ✅ Save bot response and redirect
+    if (sender === "bot") {
+      localStorage.setItem("aiMessage", message);
+      window.location.href = "AiTTS.html"; // 🔄 Replace with your TTS Studio page filename
+    }
   }
 
   function sendMessage() {
