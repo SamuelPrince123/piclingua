@@ -132,7 +132,7 @@
           clearInterval(silenceCheck);
           return;
         }
-        if (Date.now() - lastSpokenTime > 2000) {
+        if (Date.now() - lastSpokenTime > 3000) {
           console.log('Detected 2 seconds silence, stopping recognition');
           clearInterval(silenceCheck);
           recognition.stop();
