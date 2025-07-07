@@ -11,8 +11,7 @@
   border-radius: 0.5rem;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    z-index: 10;
-
+  z-index: 10;
   transition: background 0.2s, transform 0.2s;
 }
 #backBtn:hover {
