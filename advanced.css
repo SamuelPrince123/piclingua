@@ -1,0 +1,122 @@
+/* Advanced.css - Builds on Bible.css theme */
+
+/* Reuse Bible's woody background and serif font */
+body {
+  background: url('./images/wood-texture.jpg') center/cover no-repeat fixed;
+  color: #3b2e2a;
+}
+
+/* Back Button */
+#backBtn {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: linear-gradient(135deg, #a27b5c, #7c5b3e);
+  color: #fbe8c4;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  transition: background 0.3s, transform 0.2s;
+}
+#backBtn:hover {
+  background: linear-gradient(135deg, #b88c66, #644123);
+  transform: scale(1.05);
+}
+
+/* Timer Section */
+.timer-box {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #f4eadd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Question Box */
+#questionBox {
+  margin: 2rem 0 1rem;
+  text-align: center;
+}
+
+#questionText {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #ffe8cc;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, 0.5fr);
+  gap: 1rem;
+  justify-items: center;
+}
+
+
+.choice-btn {
+  background: linear-gradient(135deg, #a27b5c, #7c5b3e);
+  color: #fff5e1;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s, background 0.3s;
+}
+
+.choice-btn:hover {
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #b78961, #5d3d26);
+}
+
+.choice-btn.correct {
+  background: #4caf50 !important;
+  color: white;
+  animation: pulse 0.5s ease-in-out;
+}
+
+.choice-btn.wrong {
+  background: #d32f2f !important;
+  color: white;
+  animation: shake 0.4s;
+}
+
+.choice-btn.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+#nextBtn {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+
+  #questionText {
+    font-size: 1rem;
+  }
+}

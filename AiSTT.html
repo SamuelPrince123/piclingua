@@ -4,79 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Free Speech Recognition Demo</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 2rem; background: #f0f0f0; }
-    button { padding: 1rem 2rem; font-size: 1.2rem; cursor: pointer; margin-right: 1rem; }
-    #transcript { margin-top: 1rem; font-size: 1.5rem; background: white; padding: 1rem; border-radius: 8px; min-height: 100px; }
-
-    /* Popup modal styles */
-    #settings-modal {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 800px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .close-modal {
-      float: right;
-      font-size: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    textarea, select, input[type=range] {
-      width: 100%;
-      margin-top: 0.5rem;
-      font-size: 1rem;
-      padding: 0.5rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .range-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    #speak {
-      margin-top: 1rem;
-      width: 100%;
-      padding: 1rem;
-      font-size: 1.2rem;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-
-    #speak:hover {
-      background: #45a049;
-    }
-  </style>
+  <link rel="stylesheet" href="AiSTT.css" />
 </head>
 <body>
 
 <h1>🎙️ Free Speech Recognition Demo</h1>
 <button id="start-btn">Start Listening</button>
 <button id="settings-btn">⚙️ Settings</button>
+<button id="user-speak-btn">🎤 User Speak</button>
 
-<div id="transcript" placeholder="Your speech will appear here..."></div>
+<!-- Live transcript -->
+<div id="transcript" style="margin-top: 20px; font-weight: bold;"></div>
 
 <!-- SETTINGS MODAL -->
 <div id="settings-modal">
@@ -92,157 +30,20 @@
 
     <label for="pitch">Pitch</label>
     <input type="range" id="pitch" min="0" max="2" value="1" step="0.1">
-    <div class="range-label">
-      <span>Low</span><span>Normal</span><span>High</span>
-    </div>
+    <div class="range-label"><span>Low</span><span>Normal</span><span>High</span></div>
 
     <label for="rate">Rate</label>
     <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1">
-    <div class="range-label">
-      <span>Slow</span><span>Normal</span><span>Fast</span>
-    </div>
+    <div class="range-label"><span>Slow</span><span>Normal</span><span>Fast</span></div>
 
     <button id="speak">🔊 Speak</button>
   </div>
 </div>
 
-<script>
-  // Voice Settings Logic
-  const textInput = document.getElementById('text');
-  const voiceSelect = document.getElementById('voice');
-  const pitchInput = document.getElementById('pitch');
-  const rateInput = document.getElementById('rate');
-  const speakButton = document.getElementById('speak');
-  let voices = [];
+<!-- Hidden iframe to load chatbot -->
+<iframe id="deepFrame" src="" style="display: none;"></iframe>
 
-  function populateVoices() {
-    voices = speechSynthesis.getVoices();
-    voiceSelect.innerHTML = '';
-    voices.forEach((voice, i) => {
-      const option = document.createElement('option');
-      option.value = i;
-      option.textContent = `${voice.name} (${voice.lang})` + (voice.default ? ' — DEFAULT' : '');
-      voiceSelect.appendChild(option);
-    });
-  }
-
-  speechSynthesis.onvoiceschanged = populateVoices;
-
-  speakButton.addEventListener('click', () => {
-    const utterance = new SpeechSynthesisUtterance(textInput.value);
-    utterance.voice = voices[voiceSelect.value];
-    utterance.pitch = parseFloat(pitchInput.value);
-    utterance.rate = parseFloat(rateInput.value);
-    speechSynthesis.speak(utterance);
-  });
-
-  window.onload = () => setTimeout(populateVoices, 100);
-
-  // Popup open/close logic
-  const settingsModal = document.getElementById('settings-modal');
-  document.getElementById('settings-btn').addEventListener('click', () => {
-    settingsModal.style.display = 'flex';
-  });
-  document.getElementById('close-settings').addEventListener('click', () => {
-    settingsModal.style.display = 'none';
-  });
-
-  // Speech Recognition Logic
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!window.SpeechRecognition) {
-    alert('Speech Recognition not supported');
-    console.error('SpeechRecognition not supported');
-  } else {
-    const recognition = new SpeechRecognition();
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
-
-    const startBtn = document.getElementById('start-btn');
-    const transcriptDiv = document.getElementById('transcript');
-
-    let finalTranscript = '';
-    let lastSpokenTime = Date.now();
-    let startTimestamp = 0;
-    let recognitionStarted = false;
-
-    recognition.addEventListener('start', () => {
-      recognitionStarted = true;
-      startBtn.disabled = true;
-      console.log('[recognition] started');
-    });
-
-    recognition.addEventListener('result', e => {
-      lastSpokenTime = Date.now();
-      let interim = '';
-      for (let i = e.resultIndex; i < e.results.length; i++) {
-        const t = e.results[i][0].transcript;
-        if (e.results[i].isFinal) {
-          finalTranscript += t + ' ';
-        } else {
-          interim += t;
-        }
-      }
-      transcriptDiv.textContent = finalTranscript + interim;
-    });
-
-    recognition.addEventListener('error', e => {
-      console.error('[recognition] error:', e.error);
-      alert('Speech recognition error: ' + e.error);
-      startBtn.disabled = false;
-      recognitionStarted = false;
-    });
-
-    recognition.addEventListener('end', () => {
-      const elapsed = Date.now() - startTimestamp;
-      if (!recognitionStarted || elapsed < 1000) return;
-
-      recognitionStarted = false;
-      startBtn.disabled = false;
-
-      const msg = transcriptDiv.textContent.trim();
-      if (msg.length === 0) {
-        alert('No speech detected. Please try again.');
-        return;
-      }
-      localStorage.setItem('speechTranscript', msg);
-      window.location.href = 'AiDeep.html';
-    });
-
-    startBtn.addEventListener('click', () => {
-      finalTranscript = '';
-      transcriptDiv.textContent = '';
-      recognitionStarted = false;
-      lastSpokenTime = Date.now();
-      startTimestamp = Date.now();
-
-      try {
-        recognition.start();
-      } catch (err) {
-        console.error('recognition.start() error:', err);
-        alert('Failed to start recognition: ' + err.message);
-        startBtn.disabled = false;
-        return;
-      }
-
-      // Max 30 seconds
-      setTimeout(() => {
-        if (recognitionStarted) recognition.stop();
-      }, 30000);
-
-      // Silence detection
-      const silenceCheck = setInterval(() => {
-        if (!recognitionStarted) {
-          clearInterval(silenceCheck);
-          return;
-        }
-        if (Date.now() - lastSpokenTime > 3000) {
-          clearInterval(silenceCheck);
-          recognition.stop();
-        }
-      }, 2000);
-    });
-  }
-</script>
-
+<!-- JavaScript -->
+<script src="AiSTT.js"></script>
 </body>
 </html>

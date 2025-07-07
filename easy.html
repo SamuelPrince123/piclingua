@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Easy Quiz</title>
+  <link rel="stylesheet" href="Bible.css" />
+  <link rel="stylesheet" href="easy.css" />
+</head>
+<body>
+  <button id="backBtn" onclick="history.back()">← Back</button>
+  <div class="container">
+    <h1 class="title">Easy Quiz</h1>
+    <div id="questionBox">Press “Start” to begin</div>
+    <div id="timerContainer">
+      <button id="startBtn" class="btn">Start</button>
+      <span id="timer">10</span>s
+    </div>
+    <div class="buttons-vertical">
+      <button id="trueBtn" class="btn ripple" disabled>True</button>
+      <button id="falseBtn" class="btn ripple" disabled>False</button>
+    </div>
+    <button id="nextBtn" class="btn ripple" style="display:none; margin-top:1.5rem;">Next</button>
+  </div>
+
+  <!-- Audio feedback -->
+  <audio id="correctAudio" src="./music/correct.mp3"></audio>
+  <audio id="wrongAudio" src="./music/wrong.mp3"></audio>
+
+  <script src="easy.js"></script>
+</body>
+</html>

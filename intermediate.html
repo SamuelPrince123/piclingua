@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intermediate Quiz</title>
+  <link rel="stylesheet" href="Bible.css" />
+  <link rel="stylesheet" href="intermediate.css" />
+</head>
+<body>
+  <button id="backBtn" onclick="window.location.href='Bible.html'">← Home</button>
+
+  <div class="container">
+    <h1 class="title">Match the Following</h1>
+
+    <div id="timerBox">
+  ⏱️ Time Left: <span id="timer">100</span>s
+  <button id="startBtn" class="btn ripple small">Start</button>
+</div>
+
+
+    <div class="match-container" id="matchContainer">
+      <!-- Matching questions will be generated here -->
+    </div>
+
+    <button id="submitBtn" class="btn ripple" disabled>Submit</button>
+  </div>
+
+  <script src="intermediate.js"></script>
+</body>
+</html>

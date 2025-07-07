@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Result</title>
+  <link rel="stylesheet" href="Bible.css" />
+  <link rel="stylesheet" href="result.css" />
+  <style>
+    /* Reset button styling similar to back button */
+    #resetBtn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: linear-gradient(135deg, #a27b5c, #7c5b3e);
+      color: #fbe8c4;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 10;
+    }
+    #resetBtn:hover {
+      background: linear-gradient(135deg, #b88c66, #644123);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <button id="backBtn" onclick="window.location.href='Bible.html'">← Home</button>
+  <button id="resetBtn">Reset Scores</button>
+
+  <div class="container">
+    <h1 class="title">Your Results</h1>
+
+    <div class="result-section">
+      <h2>🟢 Easy Level</h2>
+      <p>Correct: <span id="easyCorrect">0</span></p>
+      <p>Wrong: <span id="easyWrong">0</span></p>
+      <p>Score: <span id="easyPercent">0%</span></p>
+    </div>
+
+    <div class="result-section">
+      <h2>🟡 Intermediate Level</h2>
+      <p>Correct: <span id="intermediateCorrect">0</span></p>
+      <p>Wrong: <span id="intermediateWrong">0</span></p>
+      <p>Score: <span id="intermediatePercent">0%</span></p>
+    </div>
+
+    <div class="result-section">
+      <h2>🔴 Advanced Level</h2>
+      <p>Correct: <span id="advancedCorrect">0</span></p>
+      <p>Wrong: <span id="advancedWrong">0</span></p>
+      <p>Score: <span id="advancedPercent">0%</span></p>
+    </div>
+
+  </div>
+
+  <script src="result.js"></script>
+  <script>
+    const resetBtn = document.getElementById('resetBtn');
+
+    resetBtn.addEventListener('click', () => {
+      if (confirm("Are you sure you want to reset all your quiz scores?")) {
+        localStorage.removeItem('easyScore');
+        localStorage.removeItem('intermediateScore');
+        localStorage.removeItem('advancedScore');
+
+        // Reset displayed results to zero
+        document.getElementById('easyCorrect').textContent = '0';
+        document.getElementById('easyWrong').textContent = '0';
+        document.getElementById('easyPercent').textContent = '0%';
+
+        document.getElementById('intermediateCorrect').textContent = '0';
+        document.getElementById('intermediateWrong').textContent = '0';
+        document.getElementById('intermediatePercent').textContent = '0%';
+
+        document.getElementById('advancedCorrect').textContent = '0';
+        document.getElementById('advancedWrong').textContent = '0';
+        document.getElementById('advancedPercent').textContent = '0%';
+      }
+    });
+  </script>
+</body>
+</html>

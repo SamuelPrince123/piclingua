@@ -1,0 +1,56 @@
+
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #f0f0f0; }
+    button { padding: 1rem 2rem; font-size: 1.2rem; cursor: pointer; margin-right: 1rem; }
+    #transcript { margin-top: 1rem; font-size: 1.5rem; background: white; padding: 1rem; border-radius: 8px; min-height: 100px; }
+
+    #settings-modal {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+
+
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .close-modal {
+      float: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    textarea, select, input[type=range] {
+      width: 100%; margin-top: 0.5rem; font-size: 1rem;
+      padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc;
+    }
+
+    .range-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem; color: #666;
+    }
+
+    #speak {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    #speak:hover { background: #45a049; }
+  

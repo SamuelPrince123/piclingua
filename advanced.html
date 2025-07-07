@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Quiz</title>
+  <link rel="stylesheet" href="Bible.css">
+  <link rel="stylesheet" href="advanced.css">
+</head>
+<body>
+  <button id="backBtn" onclick="window.location.href='Bible.html'">&larr; Home</button>
+
+  <div class="container">
+    <h1 class="title">Advanced Level</h1>
+
+    <div id="questionBox">
+      <p id="questionText">Question will appear here</p>
+      <div class="choices" id="choicesContainer"></div>
+    </div>
+
+    <div class="timer-box">
+      <span>⏱️ Time Left: <span id="timer">10</span>s</span>
+      <button id="startBtn" class="btn ripple">Start</button>
+    </div>
+
+    <button id="nextBtn" class="btn ripple" style="display: none;">Next</button>
+  </div>
+
+  <audio id="correctAudio" src="./music/correct.mp3"></audio>
+  <audio id="wrongAudio" src="./music/wrong.mp3"></audio>
+  <audio id="noAnswerAudio" src="./music/noAnswer.mp3"></audio>
+
+  <script src="advanced.js"></script>
+</body>
+</html>

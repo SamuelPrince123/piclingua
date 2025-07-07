@@ -1,0 +1,137 @@
+/* Base reset & font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'EB Garamond', serif;
+}
+
+/* Body with rich brown wood grain background */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: url('./images/wood-texture.jpg') center/cover no-repeat fixed, linear-gradient(135deg, #4b2e1f, #6a4c36);
+  color: #f4eadd;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+body {
+  background: url('./images/wood-texture.jpg') center/cover no-repeat fixed, linear-gradient(135deg, #4b2e1f, #6a4c36);
+  color: #3b2e2a;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+
+/* Quiz container with warm woody parchment color */
+.container {
+  position: relative;
+  text-align: center;
+  padding: 3rem 2rem;
+  width: 90%;
+  max-width: 450px;
+  background: rgba(60, 35, 20, 0.85); /* Semi-transparent dark parchment */
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+/* Optional decorative edges */
+.container::before,
+.container::after {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 20px;
+  background: rgba(120, 80, 50, 0.3);
+}
+.container::before {
+  top: -10px;
+  left: -10%;
+  transform: rotate(-2deg) skewY(2deg);
+}
+.container::after {
+  bottom: -10px;
+  left: -10%;
+  transform: rotate(2deg) skewY(-2deg);
+}
+
+/* Title styling */
+.title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #ffddb0;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  animation: fadeInUp 1s ease-out both 0.2s;
+}
+
+/* Vertical button layout */
+.buttons-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Stylish wooden buttons */
+.btn {
+  position: relative;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  color: #fff3e3;
+  background: linear-gradient(135deg, #8a5e3b, #5a3c26);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+  cursor: pointer;
+  overflow: hidden;
+  animation: fadeInUp 1s ease-out both 0.4s;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #a3724d, #6a442c);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* Ripple effect on click */
+.btn.ripple {
+  --ripple-color: rgba(255,255,255,0.4);
+}
+.btn.ripple::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: var(--ripple-color);
+  width: 100px;
+  height: 100px;
+  opacity: 0;
+  transition: transform 0.6s, opacity 1s;
+}
+.btn.ripple:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.4rem;
+  }
+  .btn {
+    font-size: 1rem;
+    padding: 0.9rem 1.2rem;
+  }
+}

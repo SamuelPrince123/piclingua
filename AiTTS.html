@@ -92,57 +92,77 @@
     <span>Slow</span><span>Normal</span><span>Fast</span>
   </div>
 
+
+
   <button id="speak">🔊 Speak</button>
 
-  <script>
-    const textInput = document.getElementById('text');
-    const voiceSelect = document.getElementById('voice');
-    const pitchInput = document.getElementById('pitch');
-    const rateInput = document.getElementById('rate');
-    const speakButton = document.getElementById('speak');
+<script>
+  const textInput = document.getElementById('text');
+  const voiceSelect = document.getElementById('voice');
+  const pitchInput = document.getElementById('pitch');
+  const rateInput = document.getElementById('rate');
+  const speakButton = document.getElementById('speak');
 
-    let voices = [];
+  let voices = [];
 
-    function populateVoices() {
-      voices = speechSynthesis.getVoices();
-      voiceSelect.innerHTML = '';
-      voices.forEach((voice, i) => {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = `${voice.name} (${voice.lang})` + (voice.default ? ' — DEFAULT' : '');
-        voiceSelect.appendChild(option);
-      });
-    }
+  function populateVoices() {
+    voices = speechSynthesis.getVoices();
+    voiceSelect.innerHTML = '';
 
-    function speakText(text) {
-      if (!text) return;
-      const utterance = new SpeechSynthesisUtterance(text);
-      const selectedVoice = voices[voiceSelect.value || 0];
-      utterance.voice = selectedVoice;
-      utterance.pitch = parseFloat(pitchInput.value);
-      utterance.rate = parseFloat(rateInput.value);
-      speechSynthesis.speak(utterance);
-    }
+    let defaultVoiceIndex = 0;
 
-    speechSynthesis.onvoiceschanged = populateVoices;
+    voices.forEach((voice, i) => {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = `${voice.name} (${voice.lang})` + (voice.default ? ' — DEFAULT' : '');
+      voiceSelect.appendChild(option);
 
-    window.onload = () => {
-      setTimeout(() => {
-        populateVoices();
-
-        const aiMessage = localStorage.getItem('aiMessage');
-        if (aiMessage) {
-          textInput.value = aiMessage;
-          speakText(aiMessage);
-          localStorage.removeItem('aiMessage'); // prevent repeat
-        }
-      }, 100);
-    };
-
-    speakButton.addEventListener('click', () => {
-      speakText(textInput.value);
+      // Try to auto-select a Google US English Female voice
+      if (
+        voice.name.toLowerCase().includes('female') ||
+        voice.name.toLowerCase().includes('google us english') ||
+        voice.name.toLowerCase().includes('samantha')
+      ) {
+        defaultVoiceIndex = i;
+      }
     });
-  </script>
+
+    voiceSelect.selectedIndex = defaultVoiceIndex;
+  }
+
+  function speakText(text) {
+    if (!text) return;
+    const utterance = new SpeechSynthesisUtterance(text);
+    const selectedVoice = voices[voiceSelect.value || 0];
+    utterance.voice = selectedVoice;
+    utterance.pitch = parseFloat(pitchInput.value);
+    utterance.rate = parseFloat(rateInput.value);
+    speechSynthesis.speak(utterance);
+  }
+
+  speechSynthesis.onvoiceschanged = populateVoices;
+
+  window.onload = () => {
+    setTimeout(() => {
+      populateVoices();
+
+      const aiMessage = localStorage.getItem('aiMessage');
+      if (aiMessage) {
+        textInput.value = aiMessage;
+        speakText(aiMessage);
+        localStorage.removeItem('aiMessage'); // prevent repeat
+      }
+    }, 100);
+  };
+
+  speakButton.addEventListener('click', () => {
+    speakText(textInput.value);
+  });
+</script>
+
+
+
+
 
 </body>
 </html>
