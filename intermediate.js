@@ -11,7 +11,7 @@ const pairs = [
   ["Elijah", "Fire from Heaven"],
 ];
 
-let timeLeft = 100;
+let timeLeft = 200;
 let timerInterval;
 const timerSpan = document.getElementById("timer");
 const startBtn = document.getElementById("startBtn");
@@ -88,5 +88,8 @@ function submitAnswers() {
   window.location.href = "result.html";
 }
 
-// If user still clicks submit manually before time ends (optional)
-submitBtn.addEventListener("click", submitAnswers);
+// If user clicks submit manually before timer ends
+submitBtn.addEventListener("click", () => {
+  clearInterval(timerInterval); // 🛑 stop countdown
+  submitAnswers(); // ✅ immediately submit
+});
