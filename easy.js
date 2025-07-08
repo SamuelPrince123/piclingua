@@ -1,5 +1,5 @@
 const questions = [
-  { text: "God created the world in six days.", answer: true },
+  { text: "1) God created the world in six days.", answer: true },
   { text: "Noah's ark had three decks.", answer: true },
   { text: "David was a shepherd before becoming king.", answer: true },
   { text: "The Exodus lasted 50 years.", answer: false },

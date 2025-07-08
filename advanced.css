@@ -2,7 +2,7 @@
 
 /* Reuse Bible's woody background and serif font */
 body {
-  background: url('./images/wood-texture.jpg') center/cover no-repeat fixed;
+  background: url('./images/wood-text.jpg') center/cover no-repeat fixed;
   color: #3b2e2a;
 }
 

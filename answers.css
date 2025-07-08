@@ -1,0 +1,46 @@
+/* Grid layout for Q&A cards */
+.answers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Each card */
+.qa-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  color: #fbe9d0;
+  backdrop-filter: blur(4px);
+  animation: fadeInUp 0.7s ease both;
+}
+
+.qa-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #ffe3b3;
+}
+
+.qa-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+.qa-card li {
+  padding: 0.4rem;
+  border-left: 4px solid transparent;
+  transition: all 0.3s ease;
+}
+.qa-card li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid #d4b48d;
+}
+.correct {
+  font-weight: bold;
+  color: #ffdb97;
+}
+
+/* Back button from Bible.css already applies */

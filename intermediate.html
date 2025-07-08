@@ -10,20 +10,39 @@
 <body>
   <button id="backBtn" onclick="window.location.href='Bible.html'">← Home</button>
 
-  <div class="container">
-    <h1 class="title">Match the Following</h1>
+<div class="main-wrapper">
+    <div class="left-side">
+      <h1 class="title">Match the Following</h1>
 
-    <div id="timerBox">
-  ⏱️ Time Left: <span id="timer">100</span>s
-  <button id="startBtn" class="btn ripple small">Start</button>
-</div>
+      <div id="timerBox">
+        ⏱️ Time Left: <span id="timer">100</span>s
+        <button id="startBtn" class="btn ripple small">Start</button>
+      </div>
 
+      <div class="match-container" id="matchContainer">
+        <!-- Matching questions will be generated here -->
+      </div>
 
-    <div class="match-container" id="matchContainer">
-      <!-- Matching questions will be generated here -->
+      <button id="submitBtn" class="btn ripple" disabled>Submit</button>
     </div>
 
-    <button id="submitBtn" class="btn ripple" disabled>Submit</button>
+    <div class="right-side">
+      <h2 class="sub-title">Options</h2>
+   <ol class="info-points">
+  <li><span class="left">1) Moses</span><span class="right">i) The Ten Commandments</span></li>
+  <li><span class="left">2) Abraham</span><span class="right">ii) Father of all nations</span></li>
+  <li><span class="left">3) David</span><span class="right">iii) King of Israel</span></li>
+  <li><span class="left">4) Solomon</span><span class="right">iv) Built the Temple</span></li>
+  <li><span class="left">5) Noah</span><span class="right">v) Built the Ark</span></li>
+  <li><span class="left">6) Elijah</span><span class="right">vi) Prophet of Fire</span></li>
+  <li><span class="left">7) Paul</span><span class="right">vii) Apostle to Gentiles</span></li>
+  <li><span class="left">8) Peter</span><span class="right">viii) Denied Jesus three times</span></li>
+  <li><span class="left">9) Joseph</span><span class="right">ix) Coat of many colors</span></li>
+  <li><span class="left">10) Isaiah</span><span class="right">x) Major Prophet</span></li>
+</ol>
+
+
+    </div>
   </div>
 
   <script src="intermediate.js"></script>

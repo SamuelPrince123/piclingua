@@ -37,13 +37,18 @@
   background: linear-gradient(135deg, #d1a378, #5a3a1d);
 }
 
-
 /* Scrollable match container */
 .match-container {
   max-height: 60vh;
   overflow-y: auto;
-  padding-right: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.08); /* Whitish transparent background */
+  border-radius: 0.5rem;
+  backdrop-filter: blur(2px); /* Optional: gives a frosted glass effect */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Subtle depth */
 }
+
 
 /* Each match row */
 .match-row {
@@ -77,19 +82,107 @@ select option {
   color: #fff2e2;
 }
 
-/* Responsive tweak: stack items on small screens */
+/* Submit button styling */
+#submitBtn {
+  padding: 0.8rem 1.4rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #a27b5c, #7c5b3e);
+  color: #fff4dd;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#submitBtn:hover {
+  background: linear-gradient(135deg, #cfa47b, #614027);
+  transform: scale(1.03);
+}
+/* Override Bible.css .container for this page */
+.main-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 4rem auto 2rem auto;
+  flex-wrap: wrap;
+}
+
+/* Left side (quiz) */
+.left-side {
+  flex: 1 1 40%;
+  min-width: 280px;
+}
+
+/* Right side (instructions) */
+.right-side {
+  flex: 1 1 40%;
+  min-width: 260px;
+  background: rgba(255, 255, 255, 0.08); /* Slightly brighter transparent white */
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  color: #ffeacc;
+  font-size: 1rem;
+  margin-top: 0rem;
+  backdrop-filter: blur(2px); /* Optional soft frosted-glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Optional for definition */
+}
+
+
+.right-side h2.sub-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffdcaa;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.info-points {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  color:white;
+  font-size: 1rem;
+}
+
+.info-points li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.08);
+  font-size: 17px;
+}
+
+.info-points .left {
+  flex: 1;
+  margin-right: 9rem;
+  white-space: wrap;
+}
+
+.info-points .right {
+  flex: 1;
+  font-style: normal;
+  color:white;
+}
+
+
+
+
+/* Responsive for mobile */
 @media (max-width: 768px) {
-  .match-row {
+  .main-wrapper {
     flex-direction: column;
-    align-items: flex-start;
   }
 
-  .match-row label,
-  .match-row select {
-    flex: 1 1 100%;
-  }
-
-  #timerBox {
-    font-size: 1rem;
+  .right-side {
+    margin-top: 2rem;
   }
 }
+

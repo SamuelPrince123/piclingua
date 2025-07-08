@@ -4,7 +4,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: url('./images/wood-texture.jpg') center/cover no-repeat fixed, linear-gradient(135deg, #4b2e1f, #6a4c36);
+  background: url('./images/wood-text.jpg') center/cover no-repeat fixed, linear-gradient(135deg, #4b2e1f, #6a4c36);
   color: #f4eadd;
   padding: 1rem;
   overflow: hidden;
