@@ -1,14 +1,17 @@
 const questions = [
   { text: "1) God created the world in six days.", answer: true },
-  { text: "Noah's ark had three decks.", answer: true },
-  { text: "David was a shepherd before becoming king.", answer: true },
-  { text: "The Exodus lasted 50 years.", answer: false },
-  { text: "Jesus was born in Bethlehem.", answer: true },
-  { text: "Moses wrote the Book of Psalms.", answer: false },
-  { text: "The Bible has 66 books.", answer: true },
-  { text: "The New Testament is older than the Old Testament.", answer: false },
-  { text: "Paul wrote more epistles than John.", answer: true },
-  { text: "The book of Revelation is in the Old Testament.", answer: false },
+  { text: "2)Noah's ark had three decks.", answer: true },
+  { text: "3)David was a shepherd before becoming king.", answer: true },
+  { text: "4)The Exodus lasted 50 years.", answer: false },
+  { text: "5)Jesus was born in Bethlehem.", answer: true },
+  { text: "6)Moses wrote the Book of Psalms.", answer: false },
+  { text: "7)The Bible has 66 books.", answer: true },
+  {
+    text: "8)The New Testament is older than the Old Testament.",
+    answer: false,
+  },
+  { text: "9)Paul wrote more epistles than John.", answer: true },
+  { text: "10)The book of Revelation is in the Old Testament.", answer: false },
 ];
 
 let idx = 0,
