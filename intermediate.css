@@ -62,7 +62,7 @@
 .match-row label {
   flex: 1 1 45%;
   color: #fff2e2;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .match-row select {
@@ -72,7 +72,7 @@
   border: none;
   background: rgba(255, 255, 255, 0.1);
   color: #f0e6d2;
-  font-size: 1rem;
+  font-size: 1.1rem;
   appearance: none;
 }
 
@@ -157,7 +157,7 @@ select option {
   margin-bottom: 0.5rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px dotted rgba(255, 255, 255, 0.08);
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .info-points .left {

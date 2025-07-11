@@ -33,7 +33,7 @@ body {
   text-align: center;
   padding: 3rem 2rem;
   width: 90%;
-  max-width: 450px;
+  max-width: 700px;
   background: rgba(60, 35, 20, 0.85); /* Semi-transparent dark parchment */
   border-radius: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
@@ -63,7 +63,7 @@ body {
 
 /* Title styling */
 .title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 2rem;
   color: #ffddb0;
   text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
@@ -81,7 +81,7 @@ body {
 .btn {
   position: relative;
   padding: 1rem 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1.7rem;
   color: #fff3e3;
   background: linear-gradient(135deg, #8a5e3b, #5a3c26);
   border: none;
