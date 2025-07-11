@@ -10,12 +10,12 @@ const questions = [
   { text: "6) The name David means beloved.", answer: true },
   { text: "7) The name Judah means praise.", answer: true },
   {
-    text: "8)David fought with lion and tiger.",
+    text: "8) David fought with lion and tiger.",
     answer: false,
   },
-  { text: "9)Rebekah represents the Holy Spirit.", answer: false },
+  { text: "9) Rebekah represents the Holy Spirit.", answer: false },
   {
-    text: "10)King Ahasuerus(Xerxes) rules over 120 provinces.",
+    text: "10) King Ahasuerus(Xerxes) rules over 120 provinces.",
     answer: false,
   },
 ];
