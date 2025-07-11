@@ -1,14 +1,14 @@
 const questions = [
-  { text: "1)Torah means the Prophets.", answer: false },
-  { text: "2)Jesus is the second Adam.", answer: true },
-  { text: "3)Eden in Hebrew means delight or paradise", answer: true },
+  { text: "1) Torah means the Prophets.", answer: false },
+  { text: "2) Jesus is the second Adam.", answer: true },
+  { text: "3) Eden in Hebrew means delight or paradise", answer: true },
   {
-    text: "4)Adam represents the church and Eve represents Christ.",
+    text: "4) Adam represents the church and Eve represents Christ.",
     answer: false,
   },
-  { text: "5)Noah's ark rested in mount Moriah.", answer: false },
-  { text: "6)The name David means beloved.", answer: true },
-  { text: "7)The name Judah means praise.", answer: true },
+  { text: "5) Noah's ark rested in mount Moriah.", answer: false },
+  { text: "6) The name David means beloved.", answer: true },
+  { text: "7) The name Judah means praise.", answer: true },
   {
     text: "8)David fought with lion and tiger.",
     answer: false,
