@@ -1,17 +1,23 @@
 const questions = [
-  { text: "1) God created the world in six days.", answer: true },
-  { text: "2)Noah's ark had three decks.", answer: true },
-  { text: "3)David was a shepherd before becoming king.", answer: true },
-  { text: "4)The Exodus lasted 50 years.", answer: false },
-  { text: "5)Jesus was born in Bethlehem.", answer: true },
-  { text: "6)Moses wrote the Book of Psalms.", answer: false },
-  { text: "7)The Bible has 66 books.", answer: true },
+  { text: "1)Torah means the Prophets.", answer: false },
+  { text: "2)Jesus is the second Adam.", answer: true },
+  { text: "3)Eden in Hebrew means delight or paradise", answer: true },
   {
-    text: "8)The New Testament is older than the Old Testament.",
+    text: "4)Adam represents the church and Eve represents Christ.",
     answer: false,
   },
-  { text: "9)Paul wrote more epistles than John.", answer: true },
-  { text: "10)The book of Revelation is in the Old Testament.", answer: false },
+  { text: "5)Noah's ark rested in mount Moriah.", answer: false },
+  { text: "6)The name David means beloved.", answer: true },
+  { text: "7)The name Judah means praise.", answer: true },
+  {
+    text: "8)David fought with lion and tiger.",
+    answer: false,
+  },
+  { text: "9)Rebekah represents the Holy Spirit.", answer: false },
+  {
+    text: "10)King Ahasuerus(Xerxes) rules over 120 provinces.",
+    answer: false,
+  },
 ];
 
 let idx = 0,

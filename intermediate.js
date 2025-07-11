@@ -1,14 +1,14 @@
 const pairs = [
-  ["Moses", "Ten Commandments"],
-  ["Noah", "Ark"],
-  ["David", "Goliath"],
-  ["Jesus", "Crucifixion"],
-  ["Paul", "Epistles"],
-  ["Peter", "Disciple"],
-  ["Jonah", "Whale"],
-  ["Abraham", "Faith"],
-  ["Joseph", "Dreams"],
-  ["Elijah", "Fire from Heaven"],
+  ["Moses", "Torah(the Law)"],
+  ["Noah", "The Ark"],
+  ["Goliath", "666"],
+  ["Jews and Gentiles", "Salvation"],
+  ["Tanakh", "39 books of the old testament"],
+  ["David", "friend of Johathan"],
+  ["Nevim", "The Prophets"],
+  ["Melchizedek", "King of Salem"],
+  ["Mephibosheth", "Sinners-belivers"],
+  ["Jonah", "Fish"],
 ];
 
 let timeLeft = 200;
