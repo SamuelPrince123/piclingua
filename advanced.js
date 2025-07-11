@@ -16,8 +16,8 @@ const questions = [
     answer: "God who sees",
   },
   {
-    question: "God says 'I AM WHO I AM 'to",
-    choices: [" Moses", "Abhram", "Noah", "Joseph"],
+    question: "God says 'I AM WHO I AM ' to:",
+    choices: ["Moses", "Abhram", "Noah", "Joseph"],
     answer: "Moses",
   },
   {
@@ -58,11 +58,11 @@ const questions = [
       "Melchizedek was neither Jew nor Gentile.",
       "Rahab was a Jew.",
     ],
-    answer: "Rahab was a Jew",
+    answer: "Rahab was a Jew.",
   },
   {
-    question: "Haman was   ",
-    choices: ["a Jew", "An agagite", "a Hitite", "an egyptian"],
+    question: "Haman was ",
+    choices: ["a Jew", "an agagite", "a Hitite", "an egyptian"],
     answer: "an agagite",
   },
 ];
