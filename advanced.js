@@ -53,7 +53,7 @@ const questions = [
   {
     question: "Which of the following is incorrect?",
     choices: [
-      "David is a shephert.",
+      "David is a shepherd.",
       "Abrahm's servent represents the Holy Spirit.",
       "Melchizedek was neither Jew nor Gentile.",
       "Rahab was a Jew.",
